@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#1e3a5f" name="theme-color"/>
+<link href="manifest.json" rel="manifest"/>
+<link href="icon-192.png" rel="apple-touch-icon"/>
+<title>Control de Mermas - Outlet de Aseo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#0d1b2a;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.logo{width:100px;height:100px;object-fit:contain;background:#fff;border-radius:18px;padding:8px;margin-bottom:24px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+h1{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;text-align:center}
+p{font-size:13px;color:#64748b;margin-bottom:32px;text-align:center}
+.btns{display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px}
+.btn{display:flex;align-items:center;gap:12px;padding:16px 20px;border-radius:14px;border:none;cursor:pointer;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;touch-action:manipulation}
+.btn-op{background:#7bc043;color:#fff}
+.btn-op:hover{background:#6aad35}
+.btn-ad{background:#1e3a5f;color:#e2e8f0;border:1px solid #334155}
+.btn-ad:hover{background:#2a4f7c}
+.btn-icon{font-size:22px;flex-shrink:0}
+.btn-text{text-align:left}
+.btn-title{display:block;font-size:14px;font-weight:800}
+.btn-sub{display:block;font-size:11px;opacity:.7;font-weight:400;margin-top:1px}
+.spinner{width:32px;height:32px;border:3px solid #1e3a5f;border-top:3px solid #7bc043;border-radius:50%;animation:spin .8s linear infinite;margin:20px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<img alt="Outlet de Aseo" class="logo" src="icon-192.png?expires=1789141076&amp;signature=9bfdaeb8ddf7bb90220763889957a86bb9a277824f0dbbbdabc187d7a6e2febe&amp;kid=prod-250922"/>
+<h1>Control de Mermas</h1>
+<p>Outlet de Aseo · COPRESER</p>
+<div class="btns">
+<a class="btn btn-op" href="operario.html">
+<span class="btn-icon">📱</span>
+<span class="btn-text">
+<span class="btn-title">App Operario</span>
+<span class="btn-sub">Registro de mermas en bodega</span>
+</span>
+</a>
+<a class="btn btn-ad" href="admin.html">
+<span class="btn-icon">🖥️</span>
+<span class="btn-text">
+<span class="btn-title">Panel Admin</span>
+<span class="btn-sub">Dashboard, historial y configuración</span>
+</span>
+</a>
+</div>
+<script>
+// Desregistrar service workers anteriores
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.getRegistrations().then(regs=>{
+    regs.forEach(reg=>reg.unregister());
+  });
+}
+</script>
+</body>
+</html>
