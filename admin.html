@@ -7,72 +7,72 @@
 <title>Admin - Control de Mermas</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#1c1a18;color:#e2e8f0;min-height:100vh}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
 input,select,textarea,button{font-family:inherit;font-size:13px}
 
-.hdr{background:#141312;border-bottom:2px solid #3a3835;padding:11px 20px;position:sticky;top:0;z-index:50}
+.hdr{background:#141312;border-bottom:2px solid #1e293b;padding:11px 20px;position:sticky;top:0;z-index:50}
 .hdr-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px}
-.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#f59e0b,#d97706);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#3b82f6,#1d4ed8);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
 .logo h1{font-size:15px;font-weight:800;color:#fff}
 .logo p{font-size:11px;color:#64748b}
 .sync-badge{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;border:1px solid}
-.sync-ok{background:rgba(16,185,129,.1);color:#34d399;border-color:rgba(16,185,129,.3)}
+.sync-ok{background:rgba(59,130,246,.1);color:#60a5fa;border-color:rgba(59,130,246,.3)}
 .sync-err{background:rgba(239,68,68,.1);color:#f87171;border-color:rgba(239,68,68,.3)}
-.sync-wait{background:rgba(245,158,11,.1);color:#f59e0b;border-color:rgba(245,158,11,.3)}
+.sync-wait{background:rgba(59,130,246,.1);color:#3b82f6;border-color:rgba(59,130,246,.3)}
 
 .main{max-width:1100px;margin:0 auto;padding:18px 20px}
 
-.tabs{display:flex;gap:3px;background:#141312;padding:5px;border-radius:0;border:none;border-bottom:2px solid #3a3835;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:62px;z-index:40;padding:8px 20px;box-shadow:0 4px 12px rgba(0,0,0,.4)}
+.tabs{display:flex;gap:3px;background:#141312;padding:5px;border-radius:0;border:none;border-bottom:2px solid #1e293b;flex-wrap:wrap;margin-bottom:18px;position:sticky;top:62px;z-index:40;padding:8px 20px;box-shadow:0 4px 12px rgba(0,0,0,.4)}
 .tbtn{padding:8px 14px;border-radius:8px;border:none;cursor:pointer;font-size:12px;font-weight:700;background:transparent;color:#64748b;transition:all .2s;touch-action:manipulation}
-.tbtn.on{background:#f59e0b;color:#0c0a09}
+.tbtn.on{background:#3b82f6;color:#0c0a09}
 
-.card{background:#141312;border:1px solid #3a3835;border-radius:14px;padding:18px;margin-bottom:14px}
+.card{background:#141312;border:1px solid #1e293b;border-radius:14px;padding:18px;margin-bottom:14px}
 .card-title{font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:14px}
 
 .btn{padding:9px 15px;border-radius:10px;border:none;cursor:pointer;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:all .15s;touch-action:manipulation}
 .btn:active{transform:scale(.97)}
-.btn-amber{background:#f59e0b;color:#0c0a09}
-.btn-amber:hover{background:#fbbf24}
+.btn-amber{background:#3b82f6;color:#0c0a09}
+.btn-amber:hover{background:#60a5fa}
 .btn-gray{background:#2a2826;color:#94a3b8}
-.btn-gray:hover{background:#3a3835;color:#e2e8f0}
+.btn-gray:hover{background:#1e293b;color:#e2e8f0}
 .btn-red{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
 .btn-red:hover{background:rgba(239,68,68,.2)}
-.btn-green{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.25)}
+.btn-green{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.25)}
 .btn-sm{padding:5px 9px;font-size:11px;border-radius:7px}
 
 .mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:700px){.mgrid{grid-template-columns:1fr 1fr}}
 .mc{border-radius:13px;padding:15px;border:1px solid}
-.mc-a{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+.mc-a{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2)}
 .mc-r{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2)}
-.mc-p{background:rgba(168,85,247,.08);border-color:rgba(168,85,247,.2)}
+.mc-p{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2)}
 .mc-b{background:rgba(59,130,246,.08);border-color:rgba(59,130,246,.2)}
 .mv{font-size:24px;font-weight:900;margin-bottom:2px}
-.mc-a .mv{color:#f59e0b}.mc-r .mv{color:#f87171}.mc-p .mv{color:#c084fc}.mc-b .mv{color:#60a5fa}
+.mc-a .mv{color:#3b82f6}.mc-r .mv{color:#f87171}.mc-p .mv{color:#60a5fa}.mc-b .mv{color:#60a5fa}
 .ml{font-size:12px;font-weight:700;color:#cbd5e1}
 .ms{font-size:10px;color:#64748b}
 
 .brow{margin-bottom:10px}
 .blbl{display:flex;justify-content:space-between;font-size:11px;color:#94a3b8;margin-bottom:3px}
 .btrk{height:8px;background:#2a2826;border-radius:4px;overflow:hidden}
-.bfil{height:100%;background:#f59e0b;border-radius:4px;transition:width .6s}
+.bfil{height:100%;background:#3b82f6;border-radius:4px;transition:width .6s}
 
-.twrap{overflow-x:auto;border-radius:11px;border:1px solid #3a3835}
+.twrap{overflow-x:auto;border-radius:11px;border:1px solid #1e293b}
 table{width:100%;border-collapse:collapse;font-size:12px}
-th{background:#1c1a18;padding:9px 12px;text-align:left;color:#64748b;font-weight:600;border-bottom:1px solid #3a3835;white-space:nowrap}
+th{background:#0f172a;padding:9px 12px;text-align:left;color:#64748b;font-weight:600;border-bottom:1px solid #1e293b;white-space:nowrap}
 td{padding:9px 12px;border-bottom:1px solid rgba(30,41,59,.5);vertical-align:middle}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:rgba(15,23,42,.4)}
-.skuc{font-family:monospace;color:#f59e0b;font-weight:700}
-.prc{color:#34d399;font-weight:700}
+.skuc{font-family:monospace;color:#3b82f6;font-weight:700}
+.prc{color:#60a5fa;font-weight:700}
 .rdc{color:#f87171;font-weight:700}
 
-.bpend{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.3);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
-.bdone{background:rgba(16,185,129,.1);color:#34d399;border:1px solid rgba(16,185,129,.3);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.bpend{background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.3);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
+.bdone{background:rgba(59,130,246,.1);color:#60a5fa;border:1px solid rgba(59,130,246,.3);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
 
-.mcard{background:#141312;border:1px solid #3a3835;border-radius:13px;padding:13px;margin-bottom:9px;transition:border .2s}
-.mcard:hover{border-color:#7bc043}
+.mcard{background:#141312;border:1px solid #1e293b;border-radius:13px;padding:13px;margin-bottom:9px;transition:border .2s}
+.mcard:hover{border-color:#3b82f6}
 .mtop{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
 .minfo{flex:1;min-width:0}
 .mbadges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:4px;align-items:center}
@@ -91,71 +91,71 @@ tr:hover td{background:rgba(15,23,42,.4)}
 
 .fld{margin-bottom:13px}
 .fld label{display:block;font-size:11px;font-weight:600;color:#94a3b8;margin-bottom:4px}
-.fld input,.fld select,.fld textarea{width:100%;background:#1c1a18;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none}
-.fld input:focus,.fld select:focus{border-color:#f59e0b}
+.fld input,.fld select,.fld textarea{width:100%;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none}
+.fld input:focus,.fld select:focus{border-color:#3b82f6}
 
-.uarea{border:2px dashed #3a3835;border-radius:13px;padding:28px;text-align:center;cursor:pointer;transition:border .2s}
-.uarea:hover{border-color:#f59e0b}
+.uarea{border:2px dashed #1e293b;border-radius:13px;padding:28px;text-align:center;cursor:pointer;transition:border .2s}
+.uarea:hover{border-color:#3b82f6}
 
-.opitem{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid #3a3835}
+.opitem{display:flex;align-items:center;justify-content:space-between;padding:11px 15px;border-bottom:1px solid #1e293b}
 .opitem:last-child{border-bottom:none}
-.opav{width:32px;height:32px;border-radius:50%;background:rgba(245,158,11,.15);color:#f59e0b;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:10px}
+.opav{width:32px;height:32px;border-radius:50%;background:rgba(59,130,246,.15);color:#3b82f6;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:10px}
 
-.ptw{max-height:220px;overflow-y:auto;border-radius:10px;border:1px solid #3a3835}
+.ptw{max-height:220px;overflow-y:auto;border-radius:10px;border:1px solid #1e293b}
 .ibtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 
 .toast{position:fixed;top:14px;right:14px;z-index:9999;padding:10px 14px;border-radius:10px;border:1px solid;display:none;align-items:center;gap:7px;font-size:12px;font-weight:600;max-width:300px;box-shadow:0 8px 24px rgba(0,0,0,.5)}
-.ts{background:#022c22;border-color:#059669;color:#6ee7b7}
+.ts{background:#022c22;border-color:#2563eb;color:#93c5fd}
 .te{background:#2d0a0a;border-color:#dc2626;color:#fca5a5}
 .ti{background:#0c1a2e;border-color:#2563eb;color:#93c5fd}
 
 .hide{display:none!important}
 
 #modal-paste{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:99999;padding:20px;overflow-y:auto}
-#modal-paste .mbox{background:#2a2826;border:2px solid #f59e0b;border-radius:16px;padding:20px;max-width:480px;margin:40px auto}
+#modal-paste .mbox{background:#2a2826;border:2px solid #3b82f6;border-radius:16px;padding:20px;max-width:480px;margin:40px auto}
 #modal-paste h3{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
 #modal-paste p{font-size:12px;color:#94a3b8;margin-bottom:12px}
 #modal-paste textarea{width:100%;background:#141312;border:1px solid #334155;border-radius:10px;padding:10px;color:#e2e8f0;font-family:monospace;font-size:11px;outline:none;resize:vertical;min-height:140px;display:block}
 .mbtns2{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
 .mbtns2 button{flex:1;min-width:100px;padding:12px;border-radius:10px;border:none;font-size:13px;font-weight:800;cursor:pointer;touch-action:manipulation}
-.mbtn-ok{background:#f59e0b;color:#0c0a09}
+.mbtn-ok{background:#3b82f6;color:#0c0a09}
 .mbtn-cancel{background:#2a2826;color:#e2e8f0}
 
-.live-indicator{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#34d399;font-weight:700}
-.live-dot{width:7px;height:7px;border-radius:50%;background:#34d399;animation:pulse 1.5s infinite}
+.live-indicator{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#60a5fa;font-weight:700}
+.live-dot{width:7px;height:7px;border-radius:50%;background:#60a5fa;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 /* ── ADMIN LOGIN ── */
-#adminLogin{position:fixed;inset:0;background:#1c1a18;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-.admin-login-box{background:#252320;border:1px solid #3a3835;border-radius:20px;padding:32px 28px;width:100%;max-width:380px;text-align:center}
+#adminLogin{position:fixed;inset:0;background:#0f172a;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.admin-login-box{background:#0f172a;border:1px solid #1e293b;border-radius:20px;padding:32px 28px;width:100%;max-width:380px;text-align:center}
 .admin-login-logo{width:80px;height:80px;object-fit:contain;background:#fff;border-radius:14px;padding:6px;margin:0 auto 20px;display:block}
 .admin-login-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:4px}
 .admin-login-sub{font-size:12px;color:#64748b;margin-bottom:24px}
-.admin-login-input{width:100%;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:12px 14px;color:#e2e8f0;font-size:15px;outline:none;text-align:center;letter-spacing:2px;margin-bottom:12px}
-.admin-login-input:focus{border-color:#7bc043}
-.admin-login-btn{width:100%;padding:13px;border-radius:10px;border:none;background:#7bc043;color:#fff;font-size:14px;font-weight:800;cursor:pointer;touch-action:manipulation}
+.admin-login-input{width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:12px 14px;color:#e2e8f0;font-size:15px;outline:none;text-align:center;letter-spacing:2px;margin-bottom:12px}
+.admin-login-input:focus{border-color:#3b82f6}
+.admin-login-btn{width:100%;padding:13px;border-radius:10px;border:none;background:#3b82f6;color:#fff;font-size:14px;font-weight:800;cursor:pointer;touch-action:manipulation}
 .admin-login-btn:hover{background:#6aad35}
 .admin-login-err{font-size:12px;color:#f87171;font-weight:600;margin-top:8px;min-height:18px}
 /* ── MOSTRAR/OCULTAR PIN ── */
 .eye-btn{background:none;border:none;cursor:pointer;color:#64748b;font-size:14px;padding:2px 6px;touch-action:manipulation}
-.eye-btn:hover{color:#7bc043}
+.eye-btn:hover{color:#3b82f6}
 .pin-display{font-family:monospace;font-size:12px;color:#94a3b8;letter-spacing:2px}
 
 /* FOTO MODAL */
 #fotoModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:99999;align-items:center;justify-content:center;padding:16px}
 #fotoModal img{max-width:100%;max-height:90vh;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .close-foto{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.foto-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:#7bc043;cursor:pointer;background:rgba(123,192,67,.1);border:1px solid rgba(123,192,67,.3);padding:2px 7px;border-radius:20px;font-weight:700}
+.foto-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;color:#3b82f6;cursor:pointer;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);padding:2px 7px;border-radius:20px;font-weight:700}
 
 /* FOLIO SAP */
-.folio-box{margin-top:6px;background:#1c1a18;border:1px solid #3a3835;border-radius:9px;padding:8px 10px}
+.folio-box{margin-top:6px;background:#0f172a;border:1px solid #1e293b;border-radius:9px;padding:8px 10px}
 .folio-label{font-size:10px;color:#64748b;font-weight:600;margin-bottom:3px}
-.folio-value{font-size:13px;font-weight:800;color:#7bc043;font-family:monospace}
+.folio-value{font-size:13px;font-weight:800;color:#3b82f6;font-family:monospace}
 .folio-input-row{display:flex;gap:6px;align-items:center;margin-top:4px}
-.folio-input{flex:1;background:#252320;border:1px solid #334155;border-radius:7px;padding:5px 8px;color:#e2e8f0;font-size:12px;font-family:monospace;outline:none}
-.folio-input:focus{border-color:#7bc043}
-.folio-save-btn{padding:5px 10px;border-radius:7px;border:none;background:#7bc043;color:#fff;font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;white-space:nowrap}
-.folio-pending{font-size:11px;color:#f59e0b;font-style:italic}
+.folio-input{flex:1;background:#0f172a;border:1px solid #334155;border-radius:7px;padding:5px 8px;color:#e2e8f0;font-size:12px;font-family:monospace;outline:none}
+.folio-input:focus{border-color:#3b82f6}
+.folio-save-btn{padding:5px 10px;border-radius:7px;border:none;background:#3b82f6;color:#fff;font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;white-space:nowrap}
+.folio-pending{font-size:11px;color:#3b82f6;font-style:italic}
 </style>
 </head>
 <body>
@@ -210,52 +210,52 @@ tr:hover td{background:rgba(15,23,42,.4)}
 </div>
 </div>
 <!-- Etiqueta filtros activos -->
-<div id="filtrosActivos" style="display:none;margin-bottom:10px;padding:7px 10px;background:rgba(123,192,67,.08);border:1px solid rgba(123,192,67,.2);border-radius:8px;font-size:11px;color:#7bc043;font-weight:600"></div>
+<div id="filtrosActivos" style="display:none;margin-bottom:10px;padding:7px 10px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:8px;font-size:11px;color:#3b82f6;font-weight:600"></div>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
 <!-- MESES desplegable -->
 <div>
-<button onclick="toggleDropdown('dropMeses',this)" style="width:100%;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
-<span>📅 Mes</span><span id="lblMeses" style="color:#7bc043;font-size:11px">Todos ▼</span>
+<button onclick="toggleDropdown('dropMeses',this)" style="width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
+<span>📅 Mes</span><span id="lblMeses" style="color:#3b82f6;font-size:11px">Todos ▼</span>
 </button>
-<div id="dropMeses" style="display:none;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:8px;margin-top:4px;max-height:200px;overflow-y:auto;position:relative;z-index:10">
+<div id="dropMeses" style="display:none;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:8px;margin-top:4px;max-height:200px;overflow-y:auto;position:relative;z-index:10">
 <div id="checkMeses">
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkMeses',this)" style="accent-color:#7bc043" type="checkbox" value="ALL"/> Todos</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="1"/> Enero</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="2"/> Febrero</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="3"/> Marzo</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="4"/> Abril</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="5"/> Mayo</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="6"/> Junio</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="7"/> Julio</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="8"/> Agosto</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="9"/> Septiembre</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="10"/> Octubre</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="11"/> Noviembre</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#7bc043" type="checkbox" value="12"/> Diciembre</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkMeses',this)" style="accent-color:#3b82f6" type="checkbox" value="ALL"/> Todos</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="1"/> Enero</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="2"/> Febrero</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="3"/> Marzo</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="4"/> Abril</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="5"/> Mayo</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="6"/> Junio</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="7"/> Julio</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="8"/> Agosto</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="9"/> Septiembre</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="10"/> Octubre</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="11"/> Noviembre</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkMeses')" style="accent-color:#3b82f6" type="checkbox" value="12"/> Diciembre</label>
 </div>
 </div>
 </div>
 <!-- AÑOS desplegable -->
 <div>
-<button onclick="toggleDropdown('dropAnios',this)" style="width:100%;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
-<span>📆 Año</span><span id="lblAnios" style="color:#7bc043;font-size:11px">Todos ▼</span>
+<button onclick="toggleDropdown('dropAnios',this)" style="width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
+<span>📆 Año</span><span id="lblAnios" style="color:#3b82f6;font-size:11px">Todos ▼</span>
 </button>
-<div id="dropAnios" style="display:none;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:8px;margin-top:4px;position:relative;z-index:10">
+<div id="dropAnios" style="display:none;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:8px;margin-top:4px;position:relative;z-index:10">
 <div id="checkAnios">
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkAnios',this)" style="accent-color:#7bc043" type="checkbox" value="ALL"/> Todos</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkAnios')" style="accent-color:#7bc043" type="checkbox" value="2026"/> 2026</label>
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkAnios')" style="accent-color:#7bc043" type="checkbox" value="2027"/> 2027</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkAnios',this)" style="accent-color:#3b82f6" type="checkbox" value="ALL"/> Todos</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkAnios')" style="accent-color:#3b82f6" type="checkbox" value="2026"/> 2026</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input onchange="deselTodos('checkAnios')" style="accent-color:#3b82f6" type="checkbox" value="2027"/> 2027</label>
 </div>
 </div>
 </div>
 <!-- BODEGAS desplegable -->
 <div>
-<button onclick="toggleDropdown('dropBodegas',this)" style="width:100%;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
-<span>🏢 Bodega</span><span id="lblBodegas" style="color:#7bc043;font-size:11px">Todas ▼</span>
+<button onclick="toggleDropdown('dropBodegas',this)" style="width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:9px 12px;color:#e2e8f0;font-size:12px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;touch-action:manipulation">
+<span>🏢 Bodega</span><span id="lblBodegas" style="color:#3b82f6;font-size:11px">Todas ▼</span>
 </button>
-<div id="dropBodegas" style="display:none;background:#1c1a18;border:1px solid #3a3835;border-radius:10px;padding:8px;margin-top:4px;position:relative;z-index:10">
+<div id="dropBodegas" style="display:none;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:8px;margin-top:4px;position:relative;z-index:10">
 <div id="checkBodegas">
-<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkBodegas',this)" style="accent-color:#7bc043" type="checkbox" value="ALL"/> Todas</label>
+<label style="display:flex;align-items:center;gap:6px;padding:4px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input checked="" onchange="toggleTodos('checkBodegas',this)" style="accent-color:#3b82f6" type="checkbox" value="ALL"/> Todas</label>
 </div>
 </div>
 </div>
@@ -297,9 +297,9 @@ tr:hover td{background:rgba(15,23,42,.4)}
   <div class="card" style="padding:14px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
       <span style="font-size:13px;font-weight:700;color:#e2e8f0" id="prevTitleInline">Vista Previa</span>
-      <span id="prevCntInline" style="font-size:11px;color:#7bc043;font-weight:700"></span>
+      <span id="prevCntInline" style="font-size:11px;color:#3b82f6;font-weight:700"></span>
     </div>
-    <div style="max-height:180px;overflow-y:auto;border-radius:10px;border:1px solid #3a3835">
+    <div style="max-height:180px;overflow-y:auto;border-radius:10px;border:1px solid #1e293b">
       <table><thead><tr><th>SKU</th><th>Nombre</th><th>PMP</th><th>UM</th><th>Barcode</th></tr></thead>
       <tbody id="prevTblInline"></tbody></table>
     </div>
@@ -338,7 +338,7 @@ tr:hover td{background:rgba(15,23,42,.4)}
 <span id="hCount" style="font-size:11px;color:#64748b"></span>
 <div style="display:flex;gap:6px;flex-wrap:wrap">
 <button class="btn btn-green btn-sm" onclick="expXls()">⬇️ Exportar Excel</button>
-<button class="btn btn-sm" onclick="expPendientes()" style="background:rgba(245,158,11,.15);color:#f59e0b;border:1px solid rgba(245,158,11,.3)">⚠️ Exportar Pendientes</button>
+<button class="btn btn-sm" onclick="expPendientes()" style="background:rgba(59,130,246,.15);color:#3b82f6;border:1px solid rgba(59,130,246,.3)">⚠️ Exportar Pendientes</button>
 </div>
 </div>
 <div id="hList"></div>
@@ -352,15 +352,15 @@ tr:hover td{background:rgba(15,23,42,.4)}
 <div class="card-title">👤 Agregar Operador</div>
 <p style="font-size:12px;color:#64748b;margin-bottom:12px">Cada operador tiene su propio PIN para identificarse en el celular.</p>
 <div style="display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center">
-<input id="newOp" placeholder="Nombre completo del operador" style="background:#1c1a18;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;width:100%" type="text"/>
-<input id="newPin" maxlength="4" placeholder="PIN (4 dígitos)" style="width:120px;background:#1c1a18;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-family:monospace;letter-spacing:4px;text-align:center" type="password"/>
+<input id="newOp" placeholder="Nombre completo del operador" style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;width:100%" type="text"/>
+<input id="newPin" maxlength="4" placeholder="PIN (4 dígitos)" style="width:120px;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-family:monospace;letter-spacing:4px;text-align:center" type="password"/>
 <button class="btn btn-amber" onclick="addOp()">➕ Agregar</button>
 </div>
 </div>
 <div class="card" style="padding:0;overflow:hidden">
-<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #3a3835">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #1e293b">
 <span style="font-size:13px;font-weight:700;color:#e2e8f0">Operadores Registrados</span>
-<span id="opCnt" style="font-size:11px;color:#7bc043;font-weight:700"></span>
+<span id="opCnt" style="font-size:11px;color:#3b82f6;font-weight:700"></span>
 </div>
 <div id="opList"></div>
 </div>
@@ -371,14 +371,14 @@ tr:hover td{background:rgba(15,23,42,.4)}
 <div class="card-title">🏢 Agregar Bodega</div>
 <p style="font-size:12px;color:#64748b;margin-bottom:12px">Las bodegas aparecerán automáticamente en el celular del operario.</p>
 <div style="display:flex;gap:8px">
-<input id="newBodega" placeholder="Nombre de la bodega" style="flex:1;background:#1c1a18;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none" type="text"/>
+<input id="newBodega" placeholder="Nombre de la bodega" style="flex:1;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none" type="text"/>
 <button class="btn btn-amber" onclick="addBodega()">➕ Agregar</button>
 </div>
 </div>
 <div class="card" style="padding:0;overflow:hidden">
-<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #3a3835">
+<div style="display:flex;justify-content:space-between;align-items:center;padding:13px 15px;border-bottom:1px solid #1e293b">
 <span style="font-size:13px;font-weight:700;color:#e2e8f0">Bodegas Registradas</span>
-<span id="bodCnt" style="font-size:11px;color:#f59e0b;font-weight:700"></span>
+<span id="bodCnt" style="font-size:11px;color:#3b82f6;font-weight:700"></span>
 </div>
 <div id="bodList"></div>
 </div>
@@ -581,10 +581,10 @@ function actualizarLabelFiltro(containerId, labelId, defaultTxt){
   if(!lbl) return;
   if(vals.includes('ALL') || vals.length===0){
     lbl.textContent = defaultTxt+' ▼';
-    lbl.style.color = '#7bc043';
+    lbl.style.color = '#3b82f6';
   } else {
     lbl.textContent = vals.length+' sel. ▼';
-    lbl.style.color = '#f59e0b';
+    lbl.style.color = '#3b82f6';
   }
 }
 
@@ -614,8 +614,8 @@ function renDash(){
   const cbBod = document.getElementById('checkBodegas');
   if(cbBod){
     const checked = Array.from(cbBod.querySelectorAll('input:checked')).map(c=>c.value);
-    cbBod.innerHTML = `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input type="checkbox" value="ALL" onchange="toggleTodos('checkBodegas',this)" ${checked.includes('ALL')||checked.length===0?'checked':''} style="accent-color:#f59e0b"> Todas</label>`
-      + bodegas.map(w=>`<label style="display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input type="checkbox" value="${w}" onchange="deselTodos('checkBodegas')" ${checked.includes(w)?'checked':''} style="accent-color:#f59e0b"> ${w}</label>`).join('');
+    cbBod.innerHTML = `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input type="checkbox" value="ALL" onchange="toggleTodos('checkBodegas',this)" ${checked.includes('ALL')||checked.length===0?'checked':''} style="accent-color:#3b82f6"> Todas</label>`
+      + bodegas.map(w=>`<label style="display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;font-size:12px;color:#e2e8f0"><input type="checkbox" value="${w}" onchange="deselTodos('checkBodegas')" ${checked.includes(w)?'checked':''} style="accent-color:#3b82f6"> ${w}</label>`).join('');
   }
 
   const MESES_NOMBRES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
@@ -656,7 +656,7 @@ function renDash(){
   document.getElementById('rBars').innerHTML=br.length?br.map(r=>`<div class="brow"><div class="blbl"><span>${r.label}</span><span>${r.qty} UND · ${fmt(r.cost)}</span></div><div class="btrk"><div class="bfil" style="width:${Math.round(r.qty/mx*100)}%"></div></div></div>`).join(''):'<p style="color:#475569;font-size:12px">Sin datos para el período seleccionado</p>';
 
   const bw=WH.map(w=>{const f=filtered.filter(m=>m.warehouse===w);return{w,qty:f.reduce((a,m)=>a+m.quantity,0),cost:f.reduce((a,m)=>a+(m.totalCost||(m.quantity*(m.pmp||0))),0)};}).filter(x=>x.qty>0);
-  document.getElementById('wBars').innerHTML=bw.length?bw.map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 11px;background:#1c1a18;border-radius:9px;margin-bottom:6px"><span style="font-size:12px;color:#94a3b8">${x.w}</span><div style="text-align:right"><div style="font-size:12px;font-weight:700;color:#f59e0b">${x.qty} UND</div><div style="font-size:10px;color:#475569">${fmt(x.cost)}</div></div></div>`).join(''):'<p style="color:#475569;font-size:12px">Sin datos para el período seleccionado</p>';
+  document.getElementById('wBars').innerHTML=bw.length?bw.map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 11px;background:#0f172a;border-radius:9px;margin-bottom:6px"><span style="font-size:12px;color:#94a3b8">${x.w}</span><div style="text-align:right"><div style="font-size:12px;font-weight:700;color:#3b82f6">${x.qty} UND</div><div style="font-size:10px;color:#475569">${fmt(x.cost)}</div></div></div>`).join(''):'<p style="color:#475569;font-size:12px">Sin datos para el período seleccionado</p>';
 
   
   renDash2(filtered);}
@@ -724,10 +724,10 @@ function renHist(){
   document.getElementById('hList').innerHTML = lotesArr.length ? lotesArr.map(lote => `
     <div class="mcard" style="margin-bottom:12px">
       <!-- Header del lote -->
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #3a3835">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #1e293b">
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px">
-            <span style="font-family:monospace;font-size:13px;font-weight:800;color:#7bc043">${lote.loteId}</span>
+            <span style="font-family:monospace;font-size:13px;font-weight:800;color:#3b82f6">${lote.loteId}</span>
             <span class="${lote.status==='REBAJADO'?'bdone':'bpend'}">${lote.status}</span>
           </div>
           <div style="font-size:11px;color:#64748b">${lote.operator} · ${lote.warehouse.split(' - ')[0]} · ${lote.timestamp}</div>
@@ -753,10 +753,10 @@ function renHist(){
       <!-- Items del lote -->
       <div style="display:flex;flex-direction:column;gap:6px">
         ${lote.items.map(m => `
-          <div style="background:#1c1a18;border-radius:9px;padding:9px 11px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+          <div style="background:#0f172a;border-radius:9px;padding:9px 11px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
             <div style="flex:1;min-width:0">
               <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:2px">
-                <span style="font-family:monospace;font-size:11px;font-weight:700;color:#00a8a8">${m.id}</span>
+                <span style="font-family:monospace;font-size:11px;font-weight:700;color:#1d4ed8">${m.id}</span>
                 ${m.fotoUrl?`<span class="foto-badge" onclick="verFoto('${m.fotoUrl}')">&#x1F4F7; Ver foto</span>`:m.hasPhoto?'<span style="font-size:11px;color:#64748b">&#x1F4F7;</span>':''}
               </div>
               <div style="font-size:12px;font-weight:700;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.productName}</div>
@@ -765,7 +765,7 @@ function renHist(){
             </div>
             <div style="text-align:right;flex-shrink:0">
               <div style="font-size:15px;font-weight:900;color:#f87171">${fmt(m.totalCost||(m.quantity*(m.pmp||0)))}</div>
-              <div style="font-size:14px;font-weight:900;color:#e2e8f0;margin-top:2px">${m.quantity}<span style="font-size:11px;color:#7bc043;margin-left:2px">${m.unit||'UND'}</span></div>
+              <div style="font-size:14px;font-weight:900;color:#e2e8f0;margin-top:2px">${m.quantity}<span style="font-size:11px;color:#3b82f6;margin-left:2px">${m.unit||'UND'}</span></div>
               <button class="btn btn-red btn-sm" style="margin-top:4px" onclick="delM('${m.id}')" title="Eliminar">&#x1F5D1;</button>
             </div>
           </div>`).join('')}
@@ -878,7 +878,7 @@ function renOps(){
           <div style="font-size:13px;color:#e2e8f0;font-weight:600">${nombre}</div>
           <div style="display:flex;align-items:center;gap:6px;margin-top:2px">
             <span id="pinlbl-${key}" style="font-size:11px;color:#64748b;font-family:monospace">PIN: ${'•'.repeat(pin.length)}</span>
-            <input id="pinedit-${key}" type="password" maxlength="4" placeholder="Nuevo PIN" style="display:none;width:90px;background:#1c1a18;border:1px solid #334155;border-radius:7px;padding:4px 8px;color:#e2e8f0;font-family:monospace;letter-spacing:3px;text-align:center;font-size:12px;outline:none"/>
+            <input id="pinedit-${key}" type="password" maxlength="4" placeholder="Nuevo PIN" style="display:none;width:90px;background:#0f172a;border:1px solid #334155;border-radius:7px;padding:4px 8px;color:#e2e8f0;font-family:monospace;letter-spacing:3px;text-align:center;font-size:12px;outline:none"/>
           </div>
         </div>
       </div>
@@ -1191,13 +1191,13 @@ function renDash2(filteredMermas){
         <div style="font-size:24px;font-weight:900;color:#f87171">${sinFolio}</div>
         <div style="font-size:11px;color:#94a3b8;margin-top:2px">Sin Folio SAP</div>
       </div>
-      <div style="background:rgba(123,192,67,.08);border:1px solid rgba(123,192,67,.2);border-radius:10px;padding:12px;text-align:center">
-        <div style="font-size:24px;font-weight:900;color:#7bc043">${conFolio}</div>
+      <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:10px;padding:12px;text-align:center">
+        <div style="font-size:24px;font-weight:900;color:#3b82f6">${conFolio}</div>
         <div style="font-size:11px;color:#94a3b8;margin-top:2px">Con Folio SAP</div>
       </div>
     </div>
-    <div style="background:#1c1a18;border-radius:8px;overflow:hidden;height:8px">
-      <div style="height:100%;background:#7bc043;width:${pctFolio}%;transition:width .5s"></div>
+    <div style="background:#0f172a;border-radius:8px;overflow:hidden;height:8px">
+      <div style="height:100%;background:#3b82f6;width:${pctFolio}%;transition:width .5s"></div>
     </div>
     <div style="font-size:11px;color:#64748b;text-align:center;margin-top:4px">${pctFolio}% procesado en SAP BO</div>
   `;
@@ -1237,13 +1237,13 @@ function renDash2(filteredMermas){
   const maxCost = top10[0]?.cost || 1;
   document.getElementById('topProductos').innerHTML = top10.length ?
     top10.map((p,i)=>`
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #3a3835">
-        <span style="font-size:13px;font-weight:800;color:#7bc043;width:20px;flex-shrink:0">${i+1}</span>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #1e293b">
+        <span style="font-size:13px;font-weight:800;color:#3b82f6;width:20px;flex-shrink:0">${i+1}</span>
         <div style="flex:1;min-width:0">
           <div style="font-size:12px;font-weight:700;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${p.name}</div>
           <div style="font-size:10px;color:#64748b;font-family:monospace">${p.sku} · ${p.count} registro${p.count>1?'s':''} · ${p.qty} UND</div>
-          <div style="height:4px;background:#1c1a18;border-radius:2px;margin-top:4px;overflow:hidden">
-            <div style="height:100%;background:#7bc043;width:${Math.round(p.cost/maxCost*100)}%;border-radius:2px"></div>
+          <div style="height:4px;background:#0f172a;border-radius:2px;margin-top:4px;overflow:hidden">
+            <div style="height:100%;background:#3b82f6;width:${Math.round(p.cost/maxCost*100)}%;border-radius:2px"></div>
           </div>
         </div>
         <span style="font-size:13px;font-weight:900;color:#f87171;flex-shrink:0">${fmt(p.cost)}</span>
@@ -1309,7 +1309,7 @@ window.generarPDFLote = async loteId => {
 
   const filas = lote.items.map((m,i) => `
     <tr style="background:${i%2===0?'#f9f9f9':'#fff'}">
-      <td style="padding:7px 10px;font-family:monospace;font-size:11px;color:#00a8a8">${m.id}</td>
+      <td style="padding:7px 10px;font-family:monospace;font-size:11px;color:#1d4ed8">${m.id}</td>
       <td style="padding:7px 10px;font-family:monospace;font-size:11px">${m.sku}</td>
       <td style="padding:7px 10px;font-size:12px">${m.productName}</td>
       <td style="padding:7px 10px;text-align:center;font-weight:700">${m.quantity} ${m.unit||'UND'}</td>
@@ -1324,20 +1324,20 @@ window.generarPDFLote = async loteId => {
 <title>Lote ${lote.loteId}</title>
 <style>
   body{font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:20px;color:#1a1a1a;font-size:13px}
-  .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #7bc043;padding-bottom:14px;margin-bottom:18px}
+  .header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #3b82f6;padding-bottom:14px;margin-bottom:18px}
   .empresa{font-size:20px;font-weight:900;color:#1a1a1a}
-  .empresa span{color:#7bc043}
-  .doc-title{font-size:14px;font-weight:800;color:#fff;background:#2d2b28;padding:6px 14px;border-radius:8px}
+  .empresa span{color:#3b82f6}
+  .doc-title{font-size:14px;font-weight:800;color:#fff;background:#020617;padding:6px 14px;border-radius:8px}
   .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;background:#f5f5f5;padding:14px;border-radius:8px}
   .info-item label{font-size:10px;color:#666;font-weight:600;display:block;margin-bottom:2px}
   .info-item span{font-size:13px;font-weight:700;color:#1a1a1a}
-  .info-item .folio{color:#7bc043;font-size:15px}
-  .info-item .lote{color:#00a8a8;font-family:monospace;font-size:15px}
+  .info-item .folio{color:#3b82f6;font-size:15px}
+  .info-item .lote{color:#1d4ed8;font-family:monospace;font-size:15px}
   table{width:100%;border-collapse:collapse;margin-bottom:16px}
-  th{background:#2d2b28;color:#fff;padding:8px 10px;text-align:left;font-size:11px;font-weight:700}
+  th{background:#020617;color:#fff;padding:8px 10px;text-align:left;font-size:11px;font-weight:700}
   th:last-child{text-align:right}
   .total-row{background:#f0fdf4;font-weight:800}
-  .total-row td{padding:9px 10px;border-top:2px solid #7bc043}
+  .total-row td{padding:9px 10px;border-top:2px solid #3b82f6}
   .footer{text-align:center;font-size:10px;color:#999;margin-top:20px;border-top:1px solid #eee;padding-top:10px}
   .estado{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
   .pendiente{background:#fef3c7;color:#92400e}
