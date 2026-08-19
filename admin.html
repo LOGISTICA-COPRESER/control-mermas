@@ -134,7 +134,7 @@ tr:hover td{background:rgba(15,23,42,.4)}
 .admin-login-input{width:100%;background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:12px 14px;color:#e2e8f0;font-size:15px;outline:none;text-align:center;letter-spacing:2px;margin-bottom:12px}
 .admin-login-input:focus{border-color:#3b82f6}
 .admin-login-btn{width:100%;padding:13px;border-radius:10px;border:none;background:#3b82f6;color:#fff;font-size:14px;font-weight:800;cursor:pointer;touch-action:manipulation}
-.admin-login-btn:hover{background:#6aad35}
+.admin-login-btn:hover{background:#2563eb}
 .admin-login-err{font-size:12px;color:#f87171;font-weight:600;margin-top:8px;min-height:18px}
 /* ── MOSTRAR/OCULTAR PIN ── */
 .eye-btn{background:none;border:none;cursor:pointer;color:#64748b;font-size:14px;padding:2px 6px;touch-action:manipulation}
@@ -166,9 +166,11 @@ tr:hover td{background:rgba(15,23,42,.4)}
   <div class="admin-login-box">
     <img src="icon-192.png" class="admin-login-logo" alt="Outlet de Aseo"/>
     <div class="admin-login-title">Panel Administrador</div>
-    <div class="admin-login-sub">Ingresa la contrase&#xF1;a de acceso</div>
+    <div class="admin-login-sub">Outlet de Aseo Copreser</div>
+    <input type="email" id="adminEmailInput" class="admin-login-input"
+      placeholder="Correo electrónico" onkeydown="if(event.key==='Enter') document.getElementById('adminPassInput').focus()"/>
     <input type="password" id="adminPassInput" class="admin-login-input"
-      placeholder="Contrase&#xF1;a" onkeydown="if(event.key==='Enter') checkAdminPass()"/>
+      placeholder="Contraseña" onkeydown="if(event.key==='Enter') checkAdminPass()"/>
     <button class="admin-login-btn" onclick="checkAdminPass()">&#x1F510; Ingresar</button>
     <div class="admin-login-err" id="adminLoginErr"></div>
   </div>
@@ -184,6 +186,8 @@ tr:hover td{background:rgba(15,23,42,.4)}
 </div>
 <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
 <span class="live-indicator"><span class="live-dot"></span> Tiempo Real</span>
+<span id="userBadge" style="display:none;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);border-radius:8px;padding:4px 10px;font-size:11px;color:#60a5fa;font-weight:700"></span>
+<button onclick="cerrarSesion()" style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;border-radius:8px;padding:4px 10px;font-size:11px;font-weight:700;cursor:pointer">Salir</button>
 <div class="sync-badge sync-wait" id="syncBadge">
 <span id="syncTxt">Conectando...</span>
 </div>
@@ -196,7 +200,8 @@ tr:hover td{background:rgba(15,23,42,.4)}
 <button class="tbtn" onclick="setTab('prod')">📋 Datos Maestros</button>
 
 <button class="tbtn" onclick="setTab('hist')">📜 Historial</button>
-<button class="tbtn" onclick="setTab('ops')">⚙️ Configuración</button>
+<button class="tbtn" onclick="setTab('ops')" id="tbtn-ops">⚙️ Configuración</button>
+<button class="tbtn" onclick="setTab('auditoria')" id="tbtn-auditoria" style="display:none">📋 Auditoría</button>
 </div>
 <!-- DASHBOARD -->
 <div id="tDash">
@@ -384,8 +389,26 @@ tr:hover td{background:rgba(15,23,42,.4)}
 </div>
 </div>
 </div>
+<!-- USUARIOS ADMIN - dentro de tOps -->
+<div id="secUsuariosAdmin" style="margin-top:16px;grid-column:1/-1;display:none">
+<div class="card">
+<div class="card-title">👥 Usuarios Panel Admin</div>
+<p style="font-size:12px;color:#64748b;margin-bottom:12px">Gestiona los usuarios con acceso al panel administrador.</p>
+<div id="adminUsersList" style="border:1px solid #1e293b;border-radius:10px;overflow:hidden;margin-bottom:12px"></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:8px;align-items:end">
+  <input id="newAdminName" placeholder="Nombre completo" style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-size:12px"/>
+  <input id="newAdminEmail" placeholder="correo@copreser.cl" type="email" style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-size:12px"/>
+  <input id="newAdminPass" placeholder="Contraseña" type="password" style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-size:12px"/>
+  <select id="newAdminRole" style="background:#0f172a;border:1px solid #334155;border-radius:10px;padding:9px 11px;color:#e2e8f0;outline:none;font-size:12px;-webkit-appearance:none">
+    <option value="viewer">📊 Solo Dashboard e Historial</option>
+    <option value="superadmin">🔑 Acceso Completo</option>
+  </select>
+  <button class="btn btn-amber" onclick="agregarUsuarioAdmin()">➕ Agregar</button>
 </div>
 </div>
+</div>
+</div>
+<!-- /tOps -->
 <!-- MODAL PEGAR EXCEL -->
 <div id="modal-paste">
 <div class="mbox">
@@ -398,6 +421,49 @@ tr:hover td{background:rgba(15,23,42,.4)}
 </div>
 </div>
 </div>
+
+<!-- ── AUDITORÍA ── -->
+<div id="tab-auditoria" class="hide">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px">
+    <div>
+      <div style="font-size:15px;font-weight:800;color:#fff">📋 Log de Auditoría</div>
+      <div style="font-size:11px;color:#64748b;margin-top:2px">Registro de todas las acciones del sistema</div>
+    </div>
+    <button class="btn btn-gray btn-sm" onclick="exportarAuditoria()">⬇️ Exportar Excel</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+    <select id="filtroAudUsuario" onchange="renderAuditoria()" style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:7px 10px;color:#e2e8f0;font-size:11px;outline:none">
+      <option value="ALL">Todos los usuarios</option>
+      <option value="logistica@copreser.cl">logistica@copreser.cl</option>
+      <option value="cmunilla@copreser.cl">cmunilla@copreser.cl</option>
+      <option value="nseydewitz@copreser.cl">nseydewitz@copreser.cl</option>
+    </select>
+    <select id="filtroAudAccion" onchange="renderAuditoria()" style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:7px 10px;color:#e2e8f0;font-size:11px;outline:none">
+      <option value="ALL">Todas las acciones</option>
+      <option value="LOGIN">Inicio de sesión</option>
+      <option value="LOGOUT">Cierre de sesión</option>
+      <option value="FOLIO">Folio SAP</option>
+      <option value="EXPORT">Exportación</option>
+      <option value="CONFIG">Configuración</option>
+    </select>
+  </div>
+  <div class="twrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha/Hora</th>
+          <th>Usuario</th>
+          <th>Acción</th>
+          <th>Detalle</th>
+        </tr>
+      </thead>
+      <tbody id="auditoriaBody">
+        <tr><td colspan="4" style="text-align:center;color:#475569;padding:20px">Cargando...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <!-- SheetJS -->
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <!-- Firebase SDK -->
@@ -427,11 +493,10 @@ const db = getDatabase(app);
 // ── CONSTANTES ────────────────────────────────────────────────────────────────
 const WH = ['Bodega 01 - Bodega Central','Bodega 02 - Bodega Web','Bodega 03 - Bodega Showroom'];
 const RS = [
-  {id:'R01',label:'Daño por Manipulación / Caída'},
-  {id:'R02',label:'Producto Vencido / Expirado'},
-  {id:'R04',label:'Pérdida / Faltante de Inventario'},
-  {id:'R05',label:'Humedad / Hongos / Oxidación'},
-  {id:'R07',label:'Defecto de Fabricación / Proveedor'}
+  {id:'R01',label:'Daño por Manipulación'},
+  {id:'R02',label:'Producto Vencido'},
+  {id:'R03',label:'Producto Deteriorado'},
+  {id:'R04',label:'Daño de Fábrica'}
 ];
 const INIT_PRODUCTS = [
   {sku:'PROD-1001',barcode:'7801234560010',name:'Aceite Motor Sintético 5W-30 1L',category:'Lubricantes',pmp:12500,unit:'UN',warehouse:'Bodega 01 - Bodega Central'},
@@ -468,15 +533,19 @@ function setSyncStatus(status, extra=''){
 }
 
 // ── TABS ──────────────────────────────────────────────────────────────────────
-const TABS=['dash','prod','hist','ops'];
-const TIDS=['tDash','tProd','tHist','tOps'];
+const TABS=['dash','prod','hist','ops','auditoria'];
+const TIDS=['tDash','tProd','tHist','tOps','tab-auditoria'];
 window.setTab = t => {
   TIDS.forEach((id,i)=>document.getElementById(id).classList.toggle('hide',TABS[i]!==t));
   document.querySelectorAll('#aTabs .tbtn').forEach((b,i)=>b.classList.toggle('on',TABS[i]===t));
   if(t==='dash') renDash();
   if(t==='prod') renProd();
   if(t==='hist') renHist();
-  if(t==='ops'){ renOps(); renBodegas(); }
+  if(t==='ops'){ renOps(); renBodegas(); renAdminUsers(); }
+  if(t==='auditoria') renderAuditoria();
+  // Mostrar sección Usuarios Admin SOLO en Configuración
+  const secUA = document.getElementById('secUsuariosAdmin');
+  if(secUA) secUA.style.display = (t==='ops') ? 'block' : 'none';
 };
 
 // ── FIREBASE LISTENERS ────────────────────────────────────────────────────────
@@ -521,6 +590,7 @@ onValue(ref(db,'mermas'), snap => {
   });
   renDash();
   renHist();
+  cargarUsuariosAdmin();
 }, ()=>setSyncStatus('err'));
 
 onValue(ref(db,'bodegas'), snap => {
@@ -759,8 +829,8 @@ function renHist(){
                 <span style="font-family:monospace;font-size:11px;font-weight:700;color:#1d4ed8">${m.id}</span>
                 ${m.fotoUrl?`<span class="foto-badge" onclick="verFoto('${m.fotoUrl}')">&#x1F4F7; Ver foto</span>`:m.hasPhoto?'<span style="font-size:11px;color:#64748b">&#x1F4F7;</span>':''}
               </div>
-              <div style="font-size:12px;font-weight:700;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.productName}</div>
-              <div style="font-size:11px;color:#64748b">${m.sku} · ${m.reason}</div>
+              <div style="font-size:12px;font-weight:700;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${m.productName} <span style="font-size:12px;font-weight:700;color:#3b82f6;font-family:monospace">${m.sku}</span></div>
+              <div style="font-size:11px;color:#64748b">${m.reason}</div>
 
             </div>
             <div style="text-align:right;flex-shrink:0">
@@ -1099,20 +1169,76 @@ function getAdminPass(){
 
 // Verificar sesión admin
 if(sessionStorage.getItem('admin_ok') === 'true'){
+  const savedEmail = sessionStorage.getItem('admin_email') || '';
+  if(ADMIN_USERS[savedEmail]){
+    currentUser = { email: savedEmail, ...ADMIN_USERS[savedEmail] };
+  }
   document.getElementById('adminLogin').style.display = 'none';
+  applyRoleAccess();
 } else {
   document.getElementById('adminLogin').style.display = 'flex';
 }
 
+// ── USUARIOS DEL SISTEMA ──
+const ADMIN_USERS = {
+  'logistica@copreser.cl': { pass: 'logistica', role: 'superadmin', name: 'Pablo González' },
+  'cmunilla@copreser.cl':  { pass: 'cmunilla',  role: 'viewer',     name: 'Constanza Munilla' },
+  'nseydewitz@copreser.cl':{ pass: 'nseydewitz',role: 'viewer',     name: 'Noemi Seydewitz' }
+};
+let currentUser = null;
+
+function applyRoleAccess(){
+  if(!currentUser) return;
+  const badge = document.getElementById('userBadge');
+  if(badge){ badge.textContent = '👤 ' + currentUser.name; badge.style.display='inline'; }
+  if(currentUser.role === 'superadmin'){
+    // Acceso completo — mostrar todas las pestañas
+    document.querySelectorAll('#aTabs .tbtn').forEach(b => b.style.display='');
+    const tAud = document.getElementById('tbtn-auditoria');
+    if(tAud) tAud.style.display='';
+  } else {
+    // Viewer — solo Dashboard e Historial
+    document.querySelectorAll('#aTabs .tbtn').forEach(b => {
+      const oc = b.getAttribute('onclick') || '';
+      b.style.display = (oc.includes("'dash'") || oc.includes("'hist'")) ? '' : 'none';
+    });
+  }
+}
+
+function cerrarSesion(){
+  registrarAuditoria('LOGOUT', 'Cierre de sesión');
+  setTimeout(() => {
+    currentUser = null;
+    sessionStorage.removeItem('admin_ok');
+    sessionStorage.removeItem('admin_email');
+    location.reload();
+  }, 400);
+}
+window.cerrarSesion = cerrarSesion;
+window.agregarUsuarioAdmin = agregarUsuarioAdmin;
+window.eliminarUsuarioAdmin = eliminarUsuarioAdmin;
+window.exportarAuditoria = exportarAuditoria;
+window.renderAuditoria = renderAuditoria;
+window.registrarAuditoria = registrarAuditoria;
+window.renAdminUsers = renAdminUsers;
+window.cargarUsuariosAdmin = cargarUsuariosAdmin;
+
 window.checkAdminPass = () => {
-  const input = document.getElementById('adminPassInput').value;
-  const err = document.getElementById('adminLoginErr');
-  if(input === getAdminPass()){
+  const email = (document.getElementById('adminEmailInput')?.value||'').trim().toLowerCase();
+  const pass  = document.getElementById('adminPassInput').value.trim();
+  const err   = document.getElementById('adminLoginErr');
+  const user  = ADMIN_USERS[email];
+  if(user && user.pass === pass){
+    currentUser = { email, ...user };
     sessionStorage.setItem('admin_ok','true');
+    sessionStorage.setItem('admin_email', email);
     document.getElementById('adminLogin').style.display = 'none';
     err.textContent = '';
+    applyRoleAccess();
+    registrarAuditoria('LOGIN', 'Inicio de sesión exitoso');
+    initApp();
   } else {
-    err.textContent = '❌ Contraseña incorrecta';
+    err.textContent = '❌ Correo o contraseña incorrectos';
     document.getElementById('adminPassInput').value = '';
     document.getElementById('adminPassInput').focus();
   }
@@ -1508,7 +1634,136 @@ if('Notification' in window && Notification.permission === 'default'){
   Notification.requestPermission();
 }
 
+
+// ── FUNCIONES DE AUDITORÍA ──
+function registrarAuditoria(tipo, detalle){
+  if(!currentUser) return;
+  try {
+    push(ref(db, 'auditoria'), {
+      email: currentUser.email,
+      nombre: currentUser.name,
+      tipo, detalle,
+      timestamp: new Date().toLocaleString('es-CL')
+    });
+  } catch(e){ console.warn('Auditoría:', e); }
+}
+
+function renderAuditoria(){
+  const filtroUser   = document.getElementById('filtroAudUsuario')?.value || 'ALL';
+  const filtroAccion = document.getElementById('filtroAudAccion')?.value  || 'ALL';
+  const tbody = document.getElementById('auditoriaBody');
+  if(!tbody) return;
+  tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#475569;padding:20px">Cargando...</td></tr>';
+  get(ref(db, 'auditoria')).then(snap => {
+    const rows = [];
+    snap.forEach(c => rows.unshift({ id: c.key, ...c.val() }));
+    const filtered = rows.filter(r => {
+      const mUser   = filtroUser   === 'ALL' || r.email === filtroUser;
+      const mAccion = filtroAccion === 'ALL' || r.tipo  === filtroAccion;
+      return mUser && mAccion;
+    });
+    if(!filtered.length){
+      tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#475569;padding:20px">Sin registros aún</td></tr>';
+      return;
+    }
+    tbody.innerHTML = filtered.map(r => `
+      <tr>
+        <td style="font-size:11px;color:#64748b;white-space:nowrap">${r.timestamp||''}</td>
+        <td><span style="font-size:11px;font-weight:700;color:#3b82f6">${r.email||''}</span><br><span style="font-size:10px;color:#475569">${r.nombre||''}</span></td>
+        <td><span style="background:rgba(59,130,246,.1);color:#3b82f6;border:1px solid rgba(59,130,246,.3);padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700">${r.tipo||''}</span></td>
+        <td style="font-size:11px;color:#94a3b8">${r.detalle||''}</td>
+      </tr>`).join('');
+  }).catch(e => {
+    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#f87171;padding:20px">Error: '+e.message+'</td></tr>';
+  });
+}
+
+function exportarAuditoria(){
+  registrarAuditoria('EXPORT', 'Exportación log de auditoría');
+  get(ref(db, 'auditoria')).then(snap => {
+    const rows = [];
+    snap.forEach(c => rows.push(c.val()));
+    if(!window.XLSX){ toast('Librería no disponible','e'); return; }
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), 'Auditoría');
+    XLSX.writeFile(wb, 'Auditoria_Copreser_'+new Date().toISOString().slice(0,10)+'.xlsx');
+    toast('✅ Log de auditoría exportado');
+  }).catch(e => toast('Error: '+e.message,'e'));
+}
+
+
+// ── GESTIÓN USUARIOS ADMIN ──
+function renAdminUsers(){
+  const list = document.getElementById('adminUsersList');
+  if(!list) return;
+  const roleLabel = { superadmin: '🔑 Acceso Completo', viewer: '👁️ Dashboard e Historial' };
+  list.innerHTML = Object.entries(ADMIN_USERS).map(([email, u]) => `
+    <div class="opitem">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0">
+        <div class="opav">${u.name.split(' ').map(w=>w[0]).join('').slice(0,2)}</div>
+        <div style="min-width:0">
+          <div style="font-size:12px;font-weight:700;color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${u.name}</div>
+          <div style="font-size:10px;color:#3b82f6">${email}</div>
+          <div style="font-size:10px;color:#64748b">${roleLabel[u.role]||u.role}</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:4px;flex-shrink:0">
+        ${email !== 'logistica@copreser.cl' ? `<button onclick="eliminarUsuarioAdmin('${email}')" class="btn btn-red btn-sm">Eliminar</button>` : '<span style="font-size:10px;color:#475569">Principal</span>'}
+      </div>
+    </div>`).join('');
+}
+
+function agregarUsuarioAdmin(){
+  const name  = document.getElementById('newAdminName').value.trim();
+  const email = document.getElementById('newAdminEmail').value.trim().toLowerCase();
+  const pass  = document.getElementById('newAdminPass').value.trim();
+  const role  = document.getElementById('newAdminRole').value;
+  if(!name || !email || !pass){ toast('Completa todos los campos','e'); return; }
+  if(!email.includes('@')){ toast('Correo inválido','e'); return; }
+  if(ADMIN_USERS[email]){ toast('Este correo ya existe','e'); return; }
+  ADMIN_USERS[email] = { pass, role, name };
+  // Guardar en Firebase para persistencia
+  set(ref(db, 'adminUsers/'+email.replace(/\./g,'_')), { pass, role, name, email });
+  registrarAuditoria('CONFIG', 'Usuario admin agregado: '+email+' ('+role+')');
+  document.getElementById('newAdminName').value='';
+  document.getElementById('newAdminEmail').value='';
+  document.getElementById('newAdminPass').value='';
+  renAdminUsers();
+  toast('✅ Usuario '+name+' agregado correctamente');
+}
+
+function eliminarUsuarioAdmin(email){
+  if(!confirm('¿Eliminar usuario '+email+'?')) return;
+  delete ADMIN_USERS[email];
+  remove(ref(db, 'adminUsers/'+email.replace(/\./g,'_')));
+  registrarAuditoria('CONFIG', 'Usuario admin eliminado: '+email);
+  renAdminUsers();
+  toast('✅ Usuario eliminado');
+}
+
+// Cargar usuarios admin desde Firebase al iniciar
+function cargarUsuariosAdmin(){
+  get(ref(db, 'adminUsers')).then(snap => {
+    if(snap.exists()){
+      snap.forEach(c => {
+        const u = c.val();
+        if(u.email && u.email !== 'logistica@copreser.cl'){
+          ADMIN_USERS[u.email] = { pass: u.pass, role: u.role, name: u.name };
+        }
+      });
+    }
+    renAdminUsers();
+  });
+}
+
 setSyncStatus('wait');
+
+// Interceptar exportación para auditoría
+const _origExportarReporte = window.exportarReporteMensual;
+window.exportarReporteMensual = function(){
+  registrarAuditoria('EXPORT', 'Exportación reporte mensual Excel');
+  if(_origExportarReporte) _origExportarReporte();
+};
 </script>
 </body>
 </html>
