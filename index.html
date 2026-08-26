@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sistema de Bodega — Outlet de Aseo Copreser</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',Arial,sans-serif; background:#0f172a; color:#e2e8f0; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; }
+.logo-wrap { margin-bottom:32px; text-align:center; }
+.logo-ic { width:80px; height:80px; background:linear-gradient(135deg,#3b82f6,#1d4ed8); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 16px; box-shadow:0 8px 32px rgba(59,130,246,.3); }
+.logo-title { font-size:20px; font-weight:800; color:#fff; margin-bottom:4px; }
+.logo-sub { font-size:13px; color:#475569; }
+.cards { display:flex; flex-direction:column; gap:14px; width:100%; max-width:340px; }
+.card { background:#020617; border:1px solid #1e293b; border-radius:16px; padding:20px; text-decoration:none; color:inherit; transition:all .2s; display:flex; align-items:center; gap:16px; }
+.card:hover { border-color:#3b82f6; transform:translateY(-2px); box-shadow:0 8px 24px rgba(59,130,246,.15); }
+.card-ic { width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; }
+.card-ic.blue { background:rgba(59,130,246,.15); }
+.card-ic.slate { background:rgba(100,116,139,.15); }
+.card-title { font-size:14px; font-weight:800; color:#fff; margin-bottom:3px; }
+.card-sub { font-size:11px; color:#475569; }
+.card-arrow { margin-left:auto; color:#475569; font-size:16px; }
+.footer { margin-top:32px; font-size:10px; color:#334155; text-align:center; }
+</style>
+</head>
+<body>
+<div class="logo-wrap">
+<div class="logo-ic">📦</div>
+<div class="logo-title">Sistema de Bodega</div>
+<div class="logo-sub">Outlet de Aseo Copreser</div>
+</div>
+<div class="cards">
+<a class="card" href="operario.html">
+<div class="card-ic blue">📱</div>
+<div>
+<div class="card-title">App Operario</div>
+<div class="card-sub">Registro de mermas desde celular</div>
+</div>
+<div class="card-arrow">→</div>
+</a>
+<a class="card" href="admin.html">
+<div class="card-ic slate">🖥️</div>
+<div>
+<div class="card-title">Panel Administrador</div>
+<div class="card-sub">Dashboard y gestión desde escritorio</div>
+</div>
+<div class="card-arrow">→</div>
+</a>
+</div>
+<div class="footer">Sistema de Control de Mermas · Outlet de Aseo Copreser · 2026</div>
+</body>
+</html>
