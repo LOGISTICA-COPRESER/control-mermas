@@ -1,15 +1,16 @@
 {
-  "name": "Control de Mermas - Copreser",
-  "short_name": "Mermas Bodega",
+  "name": "Bodega Copreser",
+  "short_name": "Bodega",
   "description": "Sistema de Control de Mermas de Bodega - Outlet de Aseo Copreser",
-  "start_url": "/operario.html",
+  "start_url": "operador.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#020617",
+  "background_color": "#f1f5f9",
+  "theme_color": "#2563eb",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "icono-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
